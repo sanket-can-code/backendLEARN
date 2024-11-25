@@ -55,7 +55,7 @@ import bcrypt from "bcrypt"
     userSchema.pre("save", async function (next) {
         if (!this.isModified("password")) next()
 
-        this.password = bcrypt.hash(this.password, 10)
+        this.password = await bcrypt.hash(this.password, 10)
         next()
     })
 
@@ -90,5 +90,6 @@ import bcrypt from "bcrypt"
         )
     }
     
+const User = mongoose.model("User", userSchema)
 
-export const User = mongoose.model("User", userSchema)
+export default User 
